@@ -32,7 +32,7 @@
 
 .quantity.buttons_added .minus,
 .quantity.buttons_added .plus {
-    padding: 7px 10px 8px;
+    padding: 3px 10px 8px;
     height: 31px;
     background-color: #ffffff;
     border: none;
@@ -57,7 +57,6 @@
 .quantity input::-webkit-outer-spin-button,
 .quantity input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    -moz-appearance: none;
     margin: 0;
 }
 
