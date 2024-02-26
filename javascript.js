@@ -15,24 +15,42 @@ function calc(){
     var total      = 0;
     var finalPrice = 0;
     var name = document.getElementById("name").value;
+    var hasItem = 0;
 
     var formatter = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
     });
-
-    output.innerHTML = `<p>Caro <b>${name}</b></p>
-    <p>Seguem os dados do seu pedido.</p>
-    <p>O seu pedido é:</p>`;
+    
 
     for(var input of quantities){
-        var id = input.id-1;
-        var total = prods[id].price * parseFloat(input.value);
-
-        if(input.value > 0){
-            output.innerHTML += `<li>Prato: ${prods[id].name} - Preço unitário: ${formatter.format(prods[id].price)} - Quantidade: ${input.value} - Total: ${formatter.format(total)}</li>`;
-            finalPrice += total;
+        if(input.value == 0){
+            continue;
+        }
+        else{
+            hasItem = 1;
+            break;
         }
     }
-    output.innerHTML += `<h3>Preço final ${formatter.format(finalPrice)}</h3>`;
+
+    if(hasItem == 1){
+        output.innerHTML = `<div>Caro <b>${name}</b></div>
+        <div>Seguem os dados do seu pedido.</div>
+        <div class="mb-3">O seu pedido é:</div>`;
+    
+        for(var input of quantities){
+            var id = input.id-1;
+            var total = prods[id].price * parseFloat(input.value);
+    
+            if(input.value > 0){
+                output.innerHTML += `<li class="fs-6">Prato: ${prods[id].name} - Preço unitário: ${formatter.format(prods[id].price)} - Quantidade: ${input.value} - Total: ${formatter.format(total)}</li>`;
+                finalPrice += total;
+            }
+        }
+        output.innerHTML += `<h3 class="mt-3">Preço final ${formatter.format(finalPrice)}</h3>`;
+    }
+    else{
+        output.innerHTML = `<h3 class="text-danger text-center">Selecione pelo menos um prato!</h3>`
+    }
+
 }
